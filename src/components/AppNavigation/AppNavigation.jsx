@@ -79,7 +79,7 @@ const AppNavigation = ({ children }) => {
         </Navbar>
       }
     >
-      {children}
+      <div className="mt-10">{children}</div>
     </AppShell>
   );
 };

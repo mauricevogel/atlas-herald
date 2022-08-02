@@ -28,6 +28,24 @@ export const fetchAllGuilds = async (scope, scopeValue) => {
   return addPositionsToData(data);
 };
 
+export const fetchPlayer = async (playerName) => {
+  try {
+    const playerResponse = await fetch(`${API_BASE_URL}/player/${playerName}`);
+    const specResponse = await fetch(
+      `${API_BASE_URL}/player/${playerName}/specs`
+    );
+    const playerResponseData = await playerResponse.json();
+    const specResponseData = await specResponse.json();
+
+    return {
+      ...playerResponseData,
+      ...specResponseData[0],
+    };
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 const fetchGuilds = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/guild/getAll`);
