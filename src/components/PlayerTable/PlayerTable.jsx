@@ -24,12 +24,7 @@ const PlayerTable = (props) => {
     >
       <td>{player.position}</td>
       <td>
-        <Link
-          to={`/players/${player.name}`}
-          className="no-underline text-white"
-        >
-          {player.name} {player?.lastName}
-        </Link>
+        {player.name} {player?.lastname}
       </td>
       <td>{player.guild}</td>
       <td>

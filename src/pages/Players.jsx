@@ -1,4 +1,4 @@
-import { Pagination } from '@mantine/core';
+import { Center, Loader, Pagination } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PlayerTable from '../components/PlayerTable/PlayerTable';
@@ -8,11 +8,14 @@ const Players = () => {
   const { scope, scopeValue } = useParams();
   const [players, setPlayers] = useState([]);
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchPlayerData = async () => {
+      setIsLoading(true);
       const data = await fetchAllPlayers(scope, scopeValue);
       setPlayers(data);
+      setIsLoading(false);
     };
 
     fetchPlayerData();
@@ -32,7 +35,11 @@ const Players = () => {
 
   return (
     <div className="flex flex-col items-center justify-center m-auto max-w-6xl">
-      {players.length ? (
+      {isLoading ? (
+        <Center>
+          <Loader color="gray" className="mt-20" />
+        </Center>
+      ) : (
         <>
           <PlayerTable players={displayedPlayers()} />
           <div className="ml-auto mt-4">
@@ -45,8 +52,6 @@ const Players = () => {
             />
           </div>
         </>
-      ) : (
-        ''
       )}
     </div>
   );
