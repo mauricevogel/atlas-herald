@@ -23,7 +23,14 @@ const GuildTable = (props) => {
       className={`text-white font-bold ${colorClass(guild.realmID)}`}
     >
       <td>{guild.position}</td>
-      <td>{guild.name}</td>
+      <td>
+        <Link
+          to={`/guild/${guild.name}`}
+          className="no-underline text-white hover:text-gray-800"
+        >
+          {guild.name}
+        </Link>
+      </td>
       <td>{guild.members}</td>
       <td>{guild.realmPoints.toLocaleString('en-US')}</td>
     </tr>

@@ -5,13 +5,17 @@ export const fetchAllPlayers = async (scope, scopeValue) => {
 
   if (scope && scopeValue) {
     const scopedData = data.filter((player) => {
-      return player[scope] === scopeValue;
+      return player[scope] === scopeValue && player.realmPoints < 10000000;
     });
 
     return addPositionsToData(scopedData);
   }
 
-  return addPositionsToData(data);
+  const dataWithoutStaff = data.filter((player) => {
+    return player.realmPoints < 10000000;
+  });
+
+  return addPositionsToData(dataWithoutStaff);
 };
 
 export const fetchAllGuilds = async (scope, scopeValue) => {
@@ -40,6 +44,27 @@ export const fetchPlayer = async (playerName) => {
     return {
       ...playerResponseData,
       ...specResponseData[0],
+    };
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const fetchGuild = async (guildName) => {
+  try {
+    const guildResponse = await fetch(`${API_BASE_URL}/guild/${guildName}`);
+    const membersResponse = await fetch(
+      `${API_BASE_URL}/guild/${guildName}/members`
+    );
+    const guildResponseData = await guildResponse.json();
+    const membersResponseData = await membersResponse.json();
+    membersResponseData.sort((a, b) => {
+      return b.realmPoints - a.realmPoints;
+    });
+
+    return {
+      ...guildResponseData,
+      memberList: addPositionsToData(membersResponseData),
     };
   } catch (e) {
     console.error(e);

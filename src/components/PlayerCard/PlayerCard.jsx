@@ -1,4 +1,5 @@
 import { Table } from '@mantine/core';
+import { Link } from 'react-router-dom';
 
 const PlayerCard = ({ player }) => {
   const colorClass = (realmID) => {
@@ -48,11 +49,25 @@ const PlayerCard = ({ player }) => {
         </tr>
         <tr>
           <td className="font-bold">Guild</td>
-          <td>{player.guild}</td>
+          <td>
+            <Link
+              to={`/guild/${player.guild}`}
+              className="no-underline text-white hover:text-gray-800 font-bold"
+            >
+              {player.guild}
+            </Link>
+          </td>
         </tr>
         <tr>
           <td className="font-bold">Class</td>
-          <td>{player.class}</td>
+          <td>
+            <Link
+              to={`/players/class/${player.class}`}
+              className="no-underline text-white hover:text-gray-800 font-bold"
+            >
+              {player.class}
+            </Link>
+          </td>
         </tr>
         <tr>
           <td className="font-bold">Race</td>
