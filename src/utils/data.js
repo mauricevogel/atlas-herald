@@ -41,10 +41,18 @@ export const fetchPlayer = async (playerName) => {
     const playerResponseData = await playerResponse.json();
     const specResponseData = await specResponse.json();
 
-    return {
-      ...playerResponseData,
-      ...specResponseData[0],
-    };
+    if (specResponseData) {
+      return {
+        ...playerResponseData,
+        ...specResponseData[0],
+      };
+    } else {
+      return {
+        ...playerResponseData,
+        specializations: {},
+        realmAbilities: {},
+      };
+    }
   } catch (e) {
     console.error(e);
   }
