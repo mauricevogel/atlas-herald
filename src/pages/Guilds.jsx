@@ -1,32 +1,32 @@
 import { Center, Loader, Pagination } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import PlayerTable from '../components/PlayerTable/PlayerTable';
-import { fetchAllPlayers } from '../utils/data';
+import GuildTable from '../components/GuildTable/GuildTable';
+import { fetchAllGuilds } from '../utils/data';
 
-const Players = () => {
+const Guilds = () => {
   const { scope, scopeValue } = useParams();
-  const [players, setPlayers] = useState([]);
+  const [guilds, setGuilds] = useState([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const fetchPlayerData = async () => {
+    const fetchGuildData = async () => {
       setIsLoading(true);
-      const data = await fetchAllPlayers(scope, scopeValue);
-      setPlayers(data);
+      const data = await fetchAllGuilds(scope, scopeValue);
+      setGuilds(data);
       setIsLoading(false);
     };
 
-    fetchPlayerData();
+    fetchGuildData();
     setPage(1);
   }, [scope, scopeValue]);
 
-  const displayedPlayers = () => {
+  const displayedGuilds = () => {
     const leftBoundary = (page - 1) * 25;
     const rightBoundary = page * 25;
 
-    return players.slice(leftBoundary, rightBoundary);
+    return guilds.slice(leftBoundary, rightBoundary);
   };
 
   const handlePageChange = (newPage) => {
@@ -41,13 +41,13 @@ const Players = () => {
         </Center>
       ) : (
         <>
-          <PlayerTable players={displayedPlayers()} />
+          <GuildTable guilds={displayedGuilds()} />
           <div className="ml-auto mt-4">
             <Pagination
               page={page}
               siblings={3}
               color="dark"
-              total={Math.round(players.length / 25)}
+              total={Math.round(guilds.length / 25)}
               onChange={handlePageChange}
             />
           </div>
@@ -57,4 +57,4 @@ const Players = () => {
   );
 };
 
-export default Players;
+export default Guilds;
