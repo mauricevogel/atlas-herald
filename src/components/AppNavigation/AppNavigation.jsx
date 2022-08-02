@@ -1,12 +1,19 @@
-import { AppShell, Divider, Navbar } from '@mantine/core';
-import { Link } from 'react-router-dom';
+import { AppShell, Divider, Navbar, Select } from '@mantine/core';
+import { Link, useNavigate } from 'react-router-dom';
+import { classListForSelector } from '../../utils/data';
 
 const AppNavigation = ({ children }) => {
+  let navigate = useNavigate();
+
+  const handlePlayerSelect = (value) => {
+    navigate(`/players/class/${value}`);
+  };
+
   return (
     <AppShell
       padding="md"
       navbar={
-        <Navbar width={{ base: 200 }} p="xs">
+        <Navbar width={{ base: 250 }} p="xs">
           <Navbar.Section mt="xs" className="m-4">
             <Link to="/" className="text-black no-underline">
               <h1 className="m-0 text-2xl">Atlas Herald</h1>
@@ -58,6 +65,16 @@ const AppNavigation = ({ children }) => {
             >
               <p>Hibernia</p>
             </Link>
+          </Navbar.Section>
+          <Navbar.Section className="mx-4">
+            <p className="font-bold text-lg">Classes</p>
+            <Select
+              placeholder="Select class"
+              searchable
+              data={classListForSelector}
+              maxDropdownHeight={200}
+              onChange={handlePlayerSelect}
+            />
           </Navbar.Section>
         </Navbar>
       }
