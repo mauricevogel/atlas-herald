@@ -1,12 +1,20 @@
-import { Divider, Navbar, Select } from '@mantine/core';
+import { Divider, Input, Navbar, Select } from '@mantine/core';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { classListForSelector } from '../../utils/data';
 
 const AppNavbar = () => {
   let navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleClassSelect = (value) => {
     navigate(`/players/class/${value}`);
+  };
+
+  const handleSearchSubmit = () => {
+    if (searchTerm && searchTerm !== '') {
+      navigate(`/search/${searchTerm}`);
+    }
   };
 
   return (
@@ -18,6 +26,15 @@ const AppNavbar = () => {
         </Link>
       </Navbar.Section>
       <Divider />
+      <Navbar.Section mt="md" className="mx-4">
+        <p className="font-bold text-lg">Search</p>
+        <form onSubmit={handleSearchSubmit}>
+          <Input
+            placeholder="Search players/guilds"
+            onChange={(event) => setSearchTerm(event.currentTarget.value)}
+          ></Input>
+        </form>
+      </Navbar.Section>
       <Navbar.Section mt="md" className="mx-4">
         <p className="font-bold text-lg">Players</p>
         <Link to="/players" className="text-black no-underline">

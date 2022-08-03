@@ -1,5 +1,26 @@
 const API_BASE_URL = 'https://api.atlasfreeshard.com';
 
+export const fetchSearchResults = async (searchTerm) => {
+  const players = await fetchPlayers();
+  const guilds = await fetchGuilds();
+
+  const filteredPlayers = players.filter((player) => {
+    return (
+      player.name.toLowerCase().startsWith(searchTerm.toLowerCase()) &&
+      player.realmPoints < 10000000
+    );
+  });
+
+  const filteredGuilds = guilds.filter((guild) => {
+    return guild.name.toLowerCase().startsWith(searchTerm.toLowerCase());
+  });
+
+  return {
+    players: addPositionsToData(filteredPlayers.slice(0, 15)),
+    guilds: addPositionsToData(filteredGuilds.slice(0, 15)),
+  };
+};
+
 export const fetchAllPlayers = async (scope, scopeValue) => {
   const data = await fetchPlayers();
 
@@ -110,7 +131,7 @@ const fetchPlayers = async () => {
 const addPositionsToData = (data) => {
   return data.map((el, idx) => {
     return {
-      position: idx,
+      position: idx + 1,
       ...el,
     };
   });

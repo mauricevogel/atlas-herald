@@ -4,6 +4,7 @@ import {
   Divider,
   Drawer,
   Header,
+  Input,
   Select,
   Text,
   Title,
@@ -13,6 +14,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { classListForSelector } from '../../utils/data';
 
 const MobileHeader = () => {
+  const [searchTerm, setSearchTerm] = useState('');
   const [open, setOpen] = useState(false);
   const location = useLocation();
   let navigate = useNavigate();
@@ -33,6 +35,12 @@ const MobileHeader = () => {
     navigate(`/players/class/${value}`);
   };
 
+  const handleSearchSubmit = () => {
+    if (searchTerm && searchTerm !== '') {
+      navigate(`/search/${searchTerm}`);
+    }
+  };
+
   return (
     <>
       <Drawer
@@ -49,7 +57,21 @@ const MobileHeader = () => {
           <Text size="xs">by Xedie</Text>
         </div>
         <Divider />
-        <div className="flex flex-col px-10 py-5 gap-1">
+        <div className="flex flex-col px-10 py-5">
+          <Text size="xl" className="font-bold">
+            Search
+          </Text>
+          <form onSubmit={handleSearchSubmit}>
+            <Input
+              placeholder="Search players/guilds"
+              onChange={(event) => setSearchTerm(event.currentTarget.value)}
+            ></Input>
+            <Button type="submit" size="xs" color="dark" className="mt-2">
+              Search
+            </Button>
+          </form>
+        </div>
+        <div className="flex flex-col px-10 gap-1">
           <Text size="xl" className="font-bold">
             Players
           </Text>
