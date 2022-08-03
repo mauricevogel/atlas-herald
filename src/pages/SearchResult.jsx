@@ -1,12 +1,13 @@
-import { Alert, Center, Divider, Loader, Text } from '@mantine/core';
+import { Alert, Center, Loader, Text } from '@mantine/core';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import GuildTable from '../components/GuildTable/GuildTable';
 import PlayerTable from '../components/PlayerTable/PlayerTable';
 import { fetchSearchResults } from '../utils/data';
 import { IconAlertCircle } from '@tabler/icons';
 
 const SearchResult = () => {
+  let navigate = useNavigate();
   const { searchTerm } = useParams();
   const [searchResults, setSearchReuslts] = useState({
     players: [],
@@ -19,12 +20,19 @@ const SearchResult = () => {
       setIsLoading(true);
       const data = await fetchSearchResults(searchTerm);
 
+      if (data.players.length === 1 && !data.guilds.length) {
+        navigate(`/player/${data.players[0].name}`);
+      }
+
+      if (data.guilds.length === 1 && !data.players.length) {
+        navigate(`/guild/${data.guilds[0].name}`);
+      }
+
       setSearchReuslts(data);
       setIsLoading(false);
     };
-
     fetchSearchData();
-  }, [searchTerm]);
+  }, [searchTerm, navigate]);
 
   return (
     <>

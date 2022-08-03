@@ -11,10 +11,14 @@ const AppNavbar = () => {
     navigate(`/players/class/${value}`);
   };
 
-  const handleSearchSubmit = () => {
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+
     if (searchTerm && searchTerm !== '') {
       navigate(`/search/${searchTerm}`);
     }
+
+    setSearchTerm('');
   };
 
   return (
@@ -32,6 +36,7 @@ const AppNavbar = () => {
           <Input
             placeholder="Search players/guilds"
             onChange={(event) => setSearchTerm(event.currentTarget.value)}
+            value={searchTerm}
           ></Input>
         </form>
       </Navbar.Section>

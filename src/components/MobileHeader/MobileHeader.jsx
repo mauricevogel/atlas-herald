@@ -35,10 +35,14 @@ const MobileHeader = () => {
     navigate(`/players/class/${value}`);
   };
 
-  const handleSearchSubmit = () => {
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+
     if (searchTerm && searchTerm !== '') {
       navigate(`/search/${searchTerm}`);
     }
+
+    setSearchTerm('');
   };
 
   return (
