@@ -54,22 +54,57 @@ const PlayerTable = (props) => {
     </tr>
   ));
 
+  const mobileRows = players.map((player) => (
+    <tr
+      key={player.name}
+      className={`text-white ${colorClass(player.realmID)}`}
+    >
+      <td>{player.position}</td>
+      <td>
+        <Link
+          to={`/player/${player.name}`}
+          className="flex flex-col no-underline text-white"
+        >
+          <span className="font-bold m-0">
+            {player.name} {player?.lastname}
+          </span>
+          {`<${player.guild}>`}
+          <br />
+          {player.realmRank} {player.race} {player.class}
+        </Link>
+      </td>
+      <td>{player.realmPoints.toLocaleString('en-US')} RPs</td>
+    </tr>
+  ));
+
   return (
-    <Table>
-      <thead>
-        <tr className="font-bold">
-          <th>#</th>
-          <th>Player</th>
-          <th>Guild</th>
-          <th>Class</th>
-          <th>Race</th>
-          <th>Level</th>
-          <th>RR</th>
-          <th>RPs</th>
-        </tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </Table>
+    <>
+      <Table className="hidden lg:table">
+        <thead>
+          <tr className="font-bold">
+            <th>#</th>
+            <th>Player</th>
+            <th>Guild</th>
+            <th>Class</th>
+            <th>Race</th>
+            <th>Level</th>
+            <th>RR</th>
+            <th>RPs</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </Table>
+      <Table className="table lg:hidden">
+        <thead>
+          <tr className="font-bold">
+            <th>#</th>
+            <th>Player</th>
+            <th>RPs</th>
+          </tr>
+        </thead>
+        <tbody>{mobileRows}</tbody>
+      </Table>
+    </>
   );
 };
 
