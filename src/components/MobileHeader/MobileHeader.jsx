@@ -61,7 +61,7 @@ const MobileHeader = () => {
           <Text size="xl" className="font-bold">
             Search
           </Text>
-          <form onSubmit={handleSearchSubmit}>
+          <form onSubmit={handleSearchSubmit} tabIndex={0}>
             <Input
               placeholder="Search players/guilds"
               onChange={(event) => setSearchTerm(event.currentTarget.value)}
