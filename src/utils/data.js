@@ -59,6 +59,11 @@ export const fetchPlayer = async (playerName) => {
     const specResponse = await fetch(
       `${API_BASE_URL}/player/${playerName}/specs`
     );
+
+    if (!playerResponse.ok) {
+      return null;
+    }
+
     const playerResponseData = await playerResponse.json();
     const specResponseData = await specResponse.json();
 
@@ -77,6 +82,8 @@ export const fetchPlayer = async (playerName) => {
   } catch (e) {
     console.error(e);
   }
+
+  return null;
 };
 
 export const fetchGuild = async (guildName) => {
@@ -85,6 +92,11 @@ export const fetchGuild = async (guildName) => {
     const membersResponse = await fetch(
       `${API_BASE_URL}/guild/${guildName}/members`
     );
+
+    if (!guildResponse.ok) {
+      return null;
+    }
+
     const guildResponseData = await guildResponse.json();
     const membersResponseData = await membersResponse.json();
     membersResponseData.sort((a, b) => {
@@ -103,6 +115,11 @@ export const fetchGuild = async (guildName) => {
 const fetchGuilds = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/guild/getAll`);
+
+    if (!response.ok) {
+      return [];
+    }
+
     const data = await response.json();
     const sortedData = data.sort((a, b) => {
       return b.realmPoints - a.realmPoints;
@@ -117,6 +134,11 @@ const fetchGuilds = async () => {
 const fetchPlayers = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/player/getAll`);
+
+    if (!response.ok) {
+      return null;
+    }
+
     const data = await response.json();
     const sortedData = data.sort((a, b) => {
       return b.realmPoints - a.realmPoints;
@@ -125,6 +147,7 @@ const fetchPlayers = async () => {
     return sortedData;
   } catch (e) {
     console.error(e);
+    return [];
   }
 };
 
