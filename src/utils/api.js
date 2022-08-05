@@ -13,7 +13,31 @@ export const fetchAllPlayers = async () => {
     return player.realmPoints < 10000000;
   });
 
-  return dataWithoutStaff;
+  const enrichedData = dataWithoutStaff.map((player) => {
+    const kills =
+      player.killsAlbionPlayers +
+      player.killsMidgardPlayers +
+      player.killsHiberniaPlayers;
+
+    const soloKills =
+      player.killsAlbionSolo +
+      player.killsMidgardSolo +
+      player.killsHiberniaSolo;
+
+    const deathBlows =
+      player.killsAlbionDeathBlows +
+      player.killsMidgardDeathBlows +
+      player.killsHiberniaDeathBlows;
+
+    return {
+      ...player,
+      kills: kills,
+      soloKills: soloKills,
+      deathBlows: deathBlows,
+    };
+  });
+
+  return enrichedData;
 };
 
 export const fetchAllGuilds = async () => {
