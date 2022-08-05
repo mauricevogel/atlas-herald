@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PlayerCard from '../components/PlayerCard/PlayerCard';
-import { fetchPlayer } from '../utils/data';
+import { fetchPlayer } from '../utils/api';
 
 const Player = () => {
   const { playerName } = useParams();

@@ -1,38 +1,38 @@
 import { Alert, Center, Loader, Text } from '@mantine/core';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import GuildTable from '../components/GuildTable/GuildTable';
 import PlayerTable from '../components/PlayerTable/PlayerTable';
-import { fetchSearchResults } from '../utils/data';
+import { getSearchResults } from '../utils/data';
 import { IconAlertCircle } from '@tabler/icons';
+import { DataContext } from '../context/DataContext';
 
 const SearchResult = () => {
   let navigate = useNavigate();
   const { searchTerm } = useParams();
+  const { playersData, guildsData, isLoading } = useContext(DataContext);
   const [searchResults, setSearchReuslts] = useState({
     players: [],
     guilds: [],
   });
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const fetchSearchData = async () => {
-      setIsLoading(true);
-      const data = await fetchSearchResults(searchTerm);
+    const { players, guilds } = getSearchResults(
+      playersData,
+      guildsData,
+      searchTerm
+    );
 
-      if (data.players.length === 1 && !data.guilds.length) {
-        navigate(`/player/${data.players[0].name}`);
-      }
+    if (players.length === 1 && !guilds.length) {
+      navigate(`/player/${players[0].name}`);
+    }
 
-      if (data.guilds.length === 1 && !data.players.length) {
-        navigate(`/guild/${data.guilds[0].name}`);
-      }
+    if (guilds.length === 1 && !players.length) {
+      navigate(`/guild/${guilds[0].name}`);
+    }
 
-      setSearchReuslts(data);
-      setIsLoading(false);
-    };
-    fetchSearchData();
-  }, [searchTerm, navigate]);
+    setSearchReuslts({ players, guilds });
+  }, [searchTerm, navigate, playersData, guildsData]);
 
   return (
     <>
