@@ -28,14 +28,6 @@ export const filterPlayersData = (playersData, scope, scopeValue) => {
   }
 };
 
-// solo, db
-
-export const playersDataBySegment = (playersData, segment) => {
-  return playersData.sort((a, b) => {
-    return b[segment] - a[segment];
-  });
-};
-
 export const filterGuildsData = (guildsData, scope, scopeValue) => {
   if (scope && scopeValue) {
     const scopedData = guildsData.filter((guild) => {

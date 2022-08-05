@@ -20,19 +20,14 @@ const Players = () => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    const data = filterPlayersData(playersData, scope, scopeValue);
+    const data = filterPlayersData(playersData, scope, scopeValue).sort(
+      (a, b) => {
+        return b[segment] - a[segment];
+      }
+    );
     setPlayers(addPositionsToData(data));
     setPage(1);
-  }, [scope, scopeValue, playersData]);
-
-  useEffect(() => {
-    const data = playersData.sort((a, b) => {
-      return b[segment] - a[segment];
-    });
-
-    setPlayers(addPositionsToData(data));
-    setPage(1);
-  }, [playersData, segment]);
+  }, [scope, scopeValue, playersData, segment]);
 
   const displayedPlayers = () => {
     const leftBoundary = (page - 1) * 25;

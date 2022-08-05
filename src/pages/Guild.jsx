@@ -23,7 +23,13 @@ const Guild = () => {
         {guild ? <GuildCard guild={guild} /> : null}
       </div>
       <div className="flex flex-col items-center justify-center m-auto max-w-6xl">
-        {guild ? <PlayerTable players={guild.memberList} /> : null}
+        {guild ? (
+          <PlayerTable
+            players={guild.memberList}
+            segment="realmPoints"
+            segmentLabel="Realm Points"
+          />
+        ) : null}
       </div>
     </>
   );
