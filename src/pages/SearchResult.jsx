@@ -54,7 +54,11 @@ const SearchResult = () => {
               search.
             </Alert>
             <Text className="text-2xl font-bold my-4">Players</Text>
-            <PlayerTable players={searchResults.players} />
+            <PlayerTable
+              players={searchResults.players}
+              segment="realmPoints"
+              segmentLabel="Realm Points"
+            />
             <Text className="text-2xl font-bold my-4">Guilds</Text>
             <GuildTable guilds={searchResults.guilds} />
           </>
