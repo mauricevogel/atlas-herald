@@ -13,11 +13,11 @@ function App() {
       <DataProvider>
         <Routes>
           <Route index element={<Players />} />
+          <Route path="/guild/:guildName" element={<Guild />} />
+          <Route path="/player/:playerName" element={<Player />} />
           <Route exact path="/players" element={<Players />} />
           <Route exact path="/guilds" element={<Guilds />} />
           <Route path="/search/:searchTerm" element={<SearchResult />} />
-          <Route path="/guild/:guildName" element={<Guild />} />
-          <Route path="/player/:playerName" element={<Player />} />
           <Route path="/guilds/:scope/:scopeValue" element={<Guilds />} />
           <Route path="/players/:scope/:scopeValue" element={<Players />} />
         </Routes>
