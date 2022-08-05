@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import GuildCard from '../components/GuildCard/GuildCard';
 import PlayerTable from '../components/PlayerTable/PlayerTable';
-import { fetchGuild } from '../utils/data';
+import { fetchGuild } from '../utils/api';
 
 const Guild = () => {
   const { guildName } = useParams();
