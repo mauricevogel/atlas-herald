@@ -77,7 +77,7 @@ export const classListForSelector = [
   { value: 'Ranger', label: 'Ranger', group: 'Hibernia' },
   { value: 'Valewalker', label: 'Valewalker', group: 'Hibernia' },
   { value: 'Warden', label: 'Warden', group: 'Hibernia' },
-  { value: 'Beserker', label: 'Beserker', group: 'Midgard' },
+  { value: 'Berserker', label: 'Berserker', group: 'Midgard' },
   { value: 'Bonedancer', label: 'Bonedancer', group: 'Midgard' },
   { value: 'Healer', label: 'Healer', group: 'Midgard' },
   { value: 'Hunter', label: 'Hunter', group: 'Midgard' },

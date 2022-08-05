@@ -2,7 +2,7 @@ import { Table } from '@mantine/core';
 import { Link } from 'react-router-dom';
 
 const PlayerTable = (props) => {
-  const { players } = props;
+  const { players, segment, segmentLabel } = props;
 
   const colorClass = (realmID) => {
     switch (realmID) {
@@ -50,7 +50,7 @@ const PlayerTable = (props) => {
       <td>{player.race}</td>
       <td>{player.level}</td>
       <td>{player.realmRank}</td>
-      <td>{player.realmPoints.toLocaleString('en-US')}</td>
+      <td>{player[segment].toLocaleString('en-US')}</td>
     </tr>
   ));
 
@@ -73,7 +73,7 @@ const PlayerTable = (props) => {
           {player.realmRank} {player.race} {player.class}
         </Link>
       </td>
-      <td>{player.realmPoints.toLocaleString('en-US')} RPs</td>
+      <td>{player[segment].toLocaleString('en-US')} RPs</td>
     </tr>
   ));
 
@@ -89,7 +89,7 @@ const PlayerTable = (props) => {
             <th>Race</th>
             <th>Level</th>
             <th>RR</th>
-            <th>RPs</th>
+            <th>{segmentLabel}</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
@@ -99,7 +99,7 @@ const PlayerTable = (props) => {
           <tr className="font-bold">
             <th>#</th>
             <th>Player</th>
-            <th>RPs</th>
+            <th>{segmentLabel}</th>
           </tr>
         </thead>
         <tbody>{mobileRows}</tbody>
