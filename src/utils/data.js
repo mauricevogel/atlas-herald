@@ -54,7 +54,7 @@ export const classListForSelector = [
   { value: 'Cabalist', label: 'Reaver', group: 'Albion' },
   { value: 'Cleric', label: 'Cleric', group: 'Albion' },
   { value: 'Friar', label: 'Friar', group: 'Albion' },
-  { value: 'Infiltrator', label: 'Cleric', group: 'Albion' },
+  { value: 'Infiltrator', label: 'Infiltrator', group: 'Albion' },
   { value: 'Mercenary', label: 'Mercenary', group: 'Albion' },
   { value: 'Minstrel', label: 'Minstrel', group: 'Albion' },
   { value: 'Necromancer', label: 'Necromancer', group: 'Albion' },
