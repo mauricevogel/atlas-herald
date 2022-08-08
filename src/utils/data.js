@@ -51,7 +51,7 @@ export const addPositionsToData = (data) => {
 
 export const classListForSelector = [
   { value: 'Armsman', label: 'Armsman', group: 'Albion' },
-  { value: 'Cabalist', label: 'Reaver', group: 'Albion' },
+  { value: 'Cabalist', label: 'Cabalist', group: 'Albion' },
   { value: 'Cleric', label: 'Cleric', group: 'Albion' },
   { value: 'Friar', label: 'Friar', group: 'Albion' },
   { value: 'Infiltrator', label: 'Infiltrator', group: 'Albion' },
